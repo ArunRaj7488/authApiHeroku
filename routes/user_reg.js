@@ -3,6 +3,11 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
 const {UserReg, validate} = require('../models/user_reg');
 
+
+const cors = require("cors");
+
+router.use(cors());
+
 router.get('/', async(req,res)=> {
     const user = await UserReg.find(req.body);
     res.send(user);
