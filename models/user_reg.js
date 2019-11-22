@@ -14,15 +14,12 @@ const createUserRegSchema = new mongoose.Schema({
     },
     dob: {
         type: String,
-        required: true
     },
     phoneNumber: {
         type: String,
-        required: true
     },
     gender:{
         type: String,
-        required: true
     },
     password: {
         type: String,
@@ -42,12 +39,12 @@ function validateUserReg(userReg) {
             };
           }), 
         dob: Joi.date().format("DD/MM/YYYY"),
-        phoneNumber: Joi.string().required().regex(/^[0-9]{10}$/).error(() => {
+        phoneNumber: Joi.string().regex(/^[0-9]{10}$/).error(() => {
         return {
             message: 'Invalid Phone Number.',
         };
         }),
-        gender: Joi.string().valid('male', 'feamle', 'other').insensitive().required()
+        gender: Joi.string().valid('male', 'female', 'other').insensitive()
     }
     return Joi.validate(userReg, schema)
 }

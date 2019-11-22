@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
 const cors = require("cors");
+app.use(cors());
 
 require('./startup/db');
 require('./startup/routers')(app);
 
 
-app.use(cors());
 
 
 PORT = 5000 || process.env.PORT

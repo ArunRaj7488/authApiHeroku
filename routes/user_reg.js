@@ -9,14 +9,12 @@ router.get('/', async(req,res)=> {
 });
 router.post('/', async(req, res)=> {
     
-        const {error} = validate(req.body);
-        if(error) return res.status(404).send(error.details[0].message);
         let user = await UserReg.findOne({email:req.body.email});
-        if(user) return res.send('user already exists');
+        if(user) return res.send({status: true, error: 'user already exists'});
+        
         user = new UserReg(req.body)
-        const salt = await bcrypt.genSalt(8);
-        user.password = await bcrypt.hash(user.password, salt);
+
         await user.save();
-        res.send(user);
+        res.send({status: true});
 })
 module.exports = router;
