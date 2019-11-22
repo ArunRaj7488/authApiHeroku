@@ -8,7 +8,5 @@ require('./startup/db');
 require('./startup/routers')(app);
 
 
-
-
 PORT = 5000 || process.env.PORT
 app.listen(PORT ,()=> console.log(`Server started at ${PORT}`));
